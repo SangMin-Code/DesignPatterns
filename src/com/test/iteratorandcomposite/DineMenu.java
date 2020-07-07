@@ -38,8 +38,12 @@ public class DineMenu {
 		}
 	}
 
-	public MenuItem[] getMenuItems() {
-		return menuItems;
+	/*
+	 * public MenuItem[] getMenuItems() { return menuItems; }
+	 */
+	
+	public Iterator creatIterator() {
+		return new DinerMenuIterator(menuItems);
 	}
 	
 	
