@@ -1,6 +1,8 @@
 package com.test.iteratorandcomposite;
 
-public class DineMenu {
+import java.util.Iterator;
+
+public class DineMenu implements Menu{
 	static final int MAX_ITEMS = 6;
 	int numberOfItems = 0;
 	MenuItem[] menuItems;
@@ -42,7 +44,9 @@ public class DineMenu {
 	 * public MenuItem[] getMenuItems() { return menuItems; }
 	 */
 	
-	public Iterator creatIterator() {
+
+	@Override
+	public Iterator createIterator() {
 		return new DinerMenuIterator(menuItems);
 	}
 	

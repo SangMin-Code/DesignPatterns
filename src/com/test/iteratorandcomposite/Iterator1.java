@@ -1,6 +1,6 @@
 package com.test.iteratorandcomposite;
 
-public interface Iterator {
+public interface Iterator1 {
 	
 	boolean hasNext();
 	Object next();
