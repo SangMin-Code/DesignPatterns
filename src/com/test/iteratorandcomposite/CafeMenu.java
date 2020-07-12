@@ -1,8 +1,9 @@
 package com.test.iteratorandcomposite;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
-public class CafeMenu {
+public class CafeMenu implements Menu{
 	Hashtable menuItems = new Hashtable();
 	
 	public CafeMenu() {
@@ -14,11 +15,9 @@ public class CafeMenu {
 				false, 3.69);
 		addItem("베리또",
 				"통 핀토콩과 살사, 구아카몰이 곁들여진 푸짐한 베리또",
-				true, 4.29);
-		
-		
+				true, 4.29);		
 	}
-
+	
 	private void addItem(String name, String description, boolean vegetarian, double price) {
 		MenuItem menuItem = new MenuItem(name, description, vegetarian, price);
 		menuItems.put(menuItem.getName(), menuItem);
@@ -26,6 +25,11 @@ public class CafeMenu {
 	
 	public Hashtable getItems() {
 		return menuItems;
+	}
+	
+	@Override
+	public Iterator createIterator() {
+		return menuItems.values().iterator();
 	}
 	
 }
