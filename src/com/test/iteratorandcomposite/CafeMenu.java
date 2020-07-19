@@ -3,7 +3,7 @@ package com.test.iteratorandcomposite;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-public class CafeMenu implements Menu{
+public class CafeMenu implements MenuIterator{
 	Hashtable menuItems = new Hashtable();
 	
 	public CafeMenu() {

@@ -3,7 +3,7 @@ package com.test.iteratorandcomposite;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PancakeHouseMenu implements Menu{
+public class PancakeHouseMenu implements MenuIterator{
 	ArrayList menuItems;
 	
 	public PancakeHouseMenu() {
