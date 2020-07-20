@@ -1,5 +1,7 @@
 package com.test.iteratorandcomposite;
 
+import java.util.Iterator;
+
 public abstract class MenuComponent {
 	
 	public void add(MenuComponent menuComponent) {
@@ -26,5 +28,7 @@ public abstract class MenuComponent {
 	public void print() {
 		throw new UnsupportedOperationException();		
 	}
-	
+	public Iterator createIterator() {
+		return new NullIterator();
+	}
 }
