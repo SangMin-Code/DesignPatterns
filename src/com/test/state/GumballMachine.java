@@ -2,75 +2,69 @@ package com.test.state;
 
 public class GumballMachine {
 	
-	final static int SOLD_OUT =0;
-	final static int NO_QUARTER=1;
-	final static int HAS_QUARTER=2;
-	final static int SOLD =3;
+	State soldOutState;
+	State noQuarterState;
+	State hasQuarterState;
+	State soldState;
 	
-	int state =SOLD_OUT;
+	State state = soldOutState;
 	int count = 0;
 	
-	public GumballMachine(int count) {
-		this.count = count;
-		if(count>0) {
-			state = NO_QUARTER;
+	public GumballMachine(int numberGumballs) {
+		soldOutState = new SoldOutState(this);
+		noQuarterState = new NoQuarterState(this);
+		hasQuarterState = new HasQuarterState(this);
+		soldState = new SoldState(this);
+		this.count = numberGumballs;
+		
+		if(numberGumballs>0) {
+			state = noQuarterState;
 		}
 	}
 	
 	public void insertQuarter() {
-		if(state == HAS_QUARTER) {
-			System.out.println("동전은 한 개만 넣어주세요");			
-		}else if(state == NO_QUARTER) {
-			System.out.println("동전을 넣으셨습니다.");			
-		}else if(state == SOLD_OUT) {
-			System.out.println("매진되었습니다. 다음 기회에 이용해주세요.");			
-		}else if(state == SOLD) {
-			System.out.println("잠깐만 기다려 주세요. 알멩이가 나가고 있습니다.");
-		}
+		state.insertQuarter();
 	}
 	
 	public void ejectQuater() {
-		if(state == HAS_QUARTER) {
-			System.out.println("동전이 반환됩니다.");
-			state = NO_QUARTER;
-		}else if(state==NO_QUARTER) {
-			System.out.println("동전을 넣어주세요.");			
-		}else if(state==SOLD) {
-			System.out.println("이미 알맹이를 뽑으셨습니다.");			
-		}else if(state==SOLD_OUT) {
-			System.out.println("동전을 넣지 않으셨습니다. 동전이 반환되지 않습니다.");
-		}
+		state.ejectQuarter();
 	}
-	public void trunkCrank() {
-		if(state == HAS_QUARTER) {
-			System.out.println("손잡이를 돌리셨습니다");
-			state = SOLD;
-			dispense();
-		}else if(state==NO_QUARTER) {
-			System.out.println("동전을 넣어주세요.");			
-		}else if(state==SOLD) {
-			System.out.println("손잡이는 한 번만 돌려주세요.");
-		}else if(state==SOLD_OUT) {
-			System.out.println("매진되었습니다.");
-		}
+	public void tunkCrank() {
+		state.turnCrank();
+		state.dispense();
 	}
-	public void dispense() {
-		if(state == HAS_QUARTER) {
-			System.out.println("알맹이가 나갈 수 없습니다.");
-		}else if(state==NO_QUARTER) {
-			System.out.println("동전을 넣어주세요.");			
-		}else if(state==SOLD) {
-			System.out.println("알맹이가 나가고 있습니다.");
+	void setState(State state) {
+		this.hasQuarterState = state;
+	}
+	void releaseBall() {
+		System.out.println("A gumball comes rolling out the slot...");
+		if(count!=0) {
 			count = count-1;
-			if(count==0) {
-				System.out.println("더 이상 알맹이가 없습니다.");
-				state = SOLD_OUT;
-			}else {
-				state = NO_QUARTER;
-			}
-		}else if(state==SOLD_OUT) {
-			System.out.println("매진입니다..");
 		}
+	}
+
+	public State getSoldOutState() {
+		return soldOutState;
+	}
+
+	public State getNoQuarterState() {
+		return noQuarterState;
+	}
+
+	public State getHasQuarterState() {
+		return hasQuarterState;
+	}
+
+	public State getSoldState() {
+		return soldState;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public int getCount() {
+		return count;
 	}
 	
 	
