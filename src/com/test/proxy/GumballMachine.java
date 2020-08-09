@@ -1,41 +1,19 @@
 package com.test.proxy;
 
-import com.test.state.State;
+import java.rmi.*;
+import java.rmi.server.*;
 
-public class GumballMachine implements State{
+
+public class GumballMachine extends UnicastRemoteObject implements GumballMachineRemote{
 	String location;
 	int count;
 	State state;
 	
 	
 
-	public GumballMachine(String location, int count) {
+	public GumballMachine(String location, int count) throws RemoteException{
 		this.location = location;
 	}	
-
-	@Override
-	public void insertQuarter() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void ejectQuarter() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void turnCrank() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispense() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public int getCount() {
 		return count;
